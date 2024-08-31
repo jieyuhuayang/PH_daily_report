@@ -8,8 +8,16 @@ import pytz
 # 创建 OpenAI 客户端实例
 client = OpenAI(api_key=os.getenv('OPENAI_API_KEY'))
 
+# echo "export RODUCTHUNT_CLIENT_ID='2-0sPP-sBdX4Nud4uj_LQfynUVgV9Y7yiXdZ6YkdfVk'" >> ~/.zshrc
+# source ~/.zshrc
+# echo $RODUCTHUNT_CLIENT_ID
+# echo "PRODUCTHUNT_CLIENT_SECRET='hQl4F93WD8FcA6Ff_EsYhRbpNwfGe8X_EwE94sJzDOw'" >> ~/.zshrc
+# echo $PRODUCTHUNT_CLIENT_SECRET
+
 producthunt_client_id = os.getenv('PRODUCTHUNT_CLIENT_ID')
+print(producthunt_client_id)
 producthunt_client_secret = os.getenv('PRODUCTHUNT_CLIENT_SECRET')
+print(producthunt_client_secret)
 
 class Product:
     def __init__(self, id: str, name: str, tagline: str, description: str, votesCount: int, createdAt: str, featuredAt: str, website: str, url: str, **kwargs):
@@ -108,7 +116,12 @@ def get_producthunt_token():
         "client_secret": producthunt_client_secret,
         "grant_type": "client_credentials",
     }
-    
+    # payload = {
+    #     "client_id": "2-0sPP-sBdX4Nud4uj_LQfynUVgV9Y7yiXdZ6YkdfVk",
+    #     "client_secret": "hQl4F93WD8FcA6Ff_EsYhRbpNwfGe8X_EwE94sJzDOw",
+    #     "grant_type": "client_credentials",
+    # }
+
     headers = {
         "Content-Type": "application/json",
     }
