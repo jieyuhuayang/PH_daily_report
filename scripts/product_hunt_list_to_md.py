@@ -15,9 +15,9 @@ client = OpenAI(api_key=os.getenv('OPENAI_API_KEY'))
 # echo $PRODUCTHUNT_CLIENT_SECRET
 
 producthunt_client_id = os.getenv('PRODUCTHUNT_CLIENT_ID')
-print(producthunt_client_id)
+
 producthunt_client_secret = os.getenv('PRODUCTHUNT_CLIENT_SECRET')
-print(producthunt_client_secret)
+
 
 class Product:
     def __init__(self, id: str, name: str, tagline: str, description: str, votesCount: int, createdAt: str, featuredAt: str, website: str, url: str, **kwargs):
@@ -206,6 +206,9 @@ def main():
     # 获取昨天的日期并格式化
     yesterday = datetime.now(timezone.utc) - timedelta(days=1)
     date_str = yesterday.strftime('%Y-%m-%d')
+    print("bug")
+    print(producthunt_client_id)
+    print(producthunt_client_secret)
 
     # 获取Product Hunt数据
     products = fetch_product_hunt_data()
