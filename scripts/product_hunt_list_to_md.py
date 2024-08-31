@@ -110,10 +110,10 @@ def get_producthunt_token():
     }
 
     headers = {
-        "Content-Type": "application/json",
-    }
+    "Content-Type": "application/x-www-form-urlencoded",
+}
 
-    response = requests.post(url, json=payload, headers=headers)
+    response = requests.post(url, data=payload, headers=headers)
 
     if response.status_code != 200:
         raise Exception(f"Failed to obtain access token: {response.status_code}, {response.text}")
