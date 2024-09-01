@@ -10,7 +10,7 @@ client = OpenAI(api_key=os.getenv('OPENAI_API_KEY'))
 # echo "export PRODUCTHUNT_CLIENT_ID='2-0sPP-sBdX4Nud4uj_LQfynUVgV9Y7yiXdZ6YkdfVk'" >> ~/.zshrc
 # source ~/.zshrc
 # echo $PRODUCTHUNT_CLIENT_ID
-# echo "PRODUCTHUNT_CLIENT_SECRET='hQl4F93WD8FcA6Ff_EsYhRbpNwfGe8X_EwE94sJzDOw'" >> ~/.zshrc
+# echo "export PRODUCTHUNT_CLIENT_SECRET='hQl4F93WD8FcA6Ff_EsYhRbpNwfGe8X_EwE94sJzDOw'" >> ~/.zshrc
 # echo $PRODUCTHUNT_CLIENT_SECRET
 
 producthunt_client_id = os.getenv('PRODUCTHUNT_CLIENT_ID')
@@ -55,7 +55,7 @@ class Product:
                     {"role": "user", "content": prompt},
                 ],
                 max_tokens=50,
-                temperature=0.7,
+                temperature=0.3,
             )
             keywords = response.choices[0].message.content.strip()
             if ',' not in keywords:
@@ -75,7 +75,7 @@ class Product:
                     {"role": "user", "content": text},
                 ],
                 max_tokens=500,
-                temperature=0.7,
+                temperature=0.3,
             )
             translated_text = response.choices[0].message.content.strip()
             return translated_text
@@ -167,7 +167,7 @@ def fetch_product_hunt_data():
     has_next_page = True
     cursor = ""
 
-    while has_next_page and len(all_posts) < 30:
+    while has_next_page and len(all_posts) < 10:
         query = base_query % (date_str, date_str, cursor)
         response = requests.post(url, headers=headers, json={"query": query})
 
@@ -182,7 +182,7 @@ def fetch_product_hunt_data():
         cursor = data['pageInfo']['endCursor']
 
     # 只保留前30个产品
-    return [Product(**post) for post in sorted(all_posts, key=lambda x: x['votesCount'], reverse=True)[:30]]
+    return [Product(**post) for post in sorted(all_posts, key=lambda x: x['votesCount'], reverse=True)[:10]]
 
 def generate_markdown(products, date_str):
     """生成Markdown内容并保存到data目录"""
@@ -205,9 +205,8 @@ def main():
     # 获取昨天的日期并格式化
     yesterday = datetime.now(timezone.utc) - timedelta(days=1)
     date_str = yesterday.strftime('%Y-%m-%d')
-    print("bug")
-    print(producthunt_client_id)
-    print(producthunt_client_secret)
+    # print(producthunt_client_id)
+    # print(producthunt_client_secret)
 
     # 获取Product Hunt数据
     products = fetch_product_hunt_data()
