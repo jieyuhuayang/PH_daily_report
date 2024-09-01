@@ -7,11 +7,6 @@ import pytz
 
 # 创建 OpenAI 客户端实例
 client = OpenAI(api_key=os.getenv('OPENAI_API_KEY'))
-# echo "export PRODUCTHUNT_CLIENT_ID='2-0sPP-sBdX4Nud4uj_LQfynUVgV9Y7yiXdZ6YkdfVk'" >> ~/.zshrc
-# source ~/.zshrc
-# echo $PRODUCTHUNT_CLIENT_ID
-# echo "export PRODUCTHUNT_CLIENT_SECRET='hQl4F93WD8FcA6Ff_EsYhRbpNwfGe8X_EwE94sJzDOw'" >> ~/.zshrc
-# echo $PRODUCTHUNT_CLIENT_SECRET
 
 producthunt_client_id = os.getenv('PRODUCTHUNT_CLIENT_ID')
 
